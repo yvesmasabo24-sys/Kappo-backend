@@ -1,0 +1,74 @@
+
+---
+
+## **Authentication Routes**
+
+| Method | Endpoint        | Description         | Body / Headers |
+|--------|----------------|-------------------|----------------|
+| POST   | /users/register | Register new user  | `{ username, email, password }` |
+| POST   | /users/login    | Login user         | `{ email, password }` |
+| GET    | /users/profile  | Get logged-in user | Header: `Authorization: Bearer <JWT>` |
+
+---
+
+## **Product Routes**
+
+### Public
+
+| Method | Endpoint               | Description                  |
+|--------|-----------------------|-----------------------------|
+| GET    | /products             | Get all products            |
+| GET    | /products/featured    | Get featured products       |
+| GET    | /products/:id         | Get single product by ID    |
+
+### Admin
+
+| Method | Endpoint            | Description                 | Body / Headers |
+|--------|-------------------|----------------------------|----------------|
+| POST   | /products/create   | Create new product          | `{ name, category, price, stock, ... }` + Admin JWT |
+| PUT    | /products/:id      | Update product             | `{ fields to update }` + Admin JWT |
+| DELETE | /products/:id      | Delete product             | Admin JWT |
+
+---
+
+## **Cart Routes**  
+
+All cart routes require a valid **user JWT**.
+
+| Method | Endpoint           | Description                 | Body |
+|--------|------------------|-----------------------------|------|
+| GET    | /cart             | Get logged-in user’s cart   | - |
+| POST   | /cart/add         | Add product to cart         | `{ productId, qty }` |
+| DELETE | /cart/remove/:itemId | Remove item from cart     | - |
+| DELETE | /cart/clear       | Clear entire cart           | - |
+
+---
+
+## **Order Routes**
+
+### User
+
+| Method | Endpoint          | Description                 | Body / Headers |
+|--------|-----------------|----------------------------|----------------|
+| POST   | /orders/create   | Create order from cart      | User JWT |
+| GET    | /orders/my-orders | Get logged-in user orders  | User JWT |
+
+### Admin
+
+| Method | Endpoint           | Description                | Body / Headers |
+|--------|------------------|---------------------------|----------------|
+| GET    | /orders/all       | Get all orders            | Admin JWT |
+| PUT    | /orders/:id/status | Update order status       | `{ status: "pending"|"paid"|"shipped"|"delivered" }` + Admin JWT |
+
+---
+
+## Notes
+- Use **Bearer token** in `Authorization` header for all protected routes.
+- `status` for orders can be: `"pending"`, `"paid"`, `"shipped"`, `"delivered"`.
+- All IDs are **MongoDB ObjectIds**.
+
+---
+
+## Example Headers
+
+node_modules
