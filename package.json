@@ -2,13 +2,13 @@
   "name": "economic-back-end",
   "version": "1.0.0",
   "description": "E-commerce backend with TypeScript, Express, and MongoDB",
-  "main": "server.js",
+  "main": "dist/server.js",
   "scripts": {
     "test": "npm start",
-    "start": "npx ts-node src/server.ts",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
-    "serve": "node dist/index.js"
+    "start": "node dist/server.js",                 
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts", 
+    
+    "build": "tsc"                               
   },
   "author": "yves masabo",
   "license": "ISC",
