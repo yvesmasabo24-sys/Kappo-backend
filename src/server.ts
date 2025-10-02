@@ -10,6 +10,7 @@ import orderRoutes from "./routes/orderRoute";
 import seedroutes from "./routes/seedRoutes";
 import mainRouter from "./routes/indexRouting";
 import contactRouter from "./routes/contactRoute";
+import {swaggerUi, swaggerDocs } from "../src/documentetion/swagger"
 dotenv.config();
 
 const app: Application = express();
@@ -20,16 +21,7 @@ connectDB();
 const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
 
 app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
+  cors()
 );
 
 app.use(express.json());
@@ -49,8 +41,10 @@ app.use("/api-v1/orders", orderRoutes);
 import seedRoutes from "./routes/seedRoutes";
 //testing routes
 app.use("/api-v1/test", testRoutes);
-app.use("/api-v1", mainRouter)
+app.use("/api-v1", mainRouter);
 app.use("/api-v1/contact", contactRouter);
+
+app.use("/docs",swaggerUi.serve,swaggerUi.setup(swaggerDocs));
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Server is running!");
