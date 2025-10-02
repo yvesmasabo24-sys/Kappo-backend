@@ -2,7 +2,7 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./config/databaseConfiguration";
-import authRoute from "./routes/authRoute";
+import authRoute from "./routes/AuthRoute";
 import cartRoutes from "./routes/cartRoute"; 
 import productRoutes from "./routes/productRoute"; // ✅ import product routes
 import testRoutes from "./routes/testRoutes";
