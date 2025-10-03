@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/databaseConfiguration";
 
 // ✅ Import routes (case-sensitive for Linux/Render)
-import authRoutes from "./routes/authRoute";       // renamed from "router"
-import productRoutes from "./routes/productRoute"; // renamed from "Router"
+import Routes from "./routes/AuthRoute";       // renamed from "router"
+import router from "./routes/ProductRoute"; // renamed from "Router"
 import cartRoutes from "./routes/cartRoute";
 import testRoutes from "./routes/testRoutes";
 import orderRoutes from "./routes/orderRoute";
@@ -27,8 +27,8 @@ app.use(cors());
 app.use(express.json());
 
 // ✅ Routes
-app.use("/api-v1/users", authRoutes);
-app.use("/api-v1/products", productRoutes);
+app.use("/api-v1/users", Routes);
+app.use("/api-v1/products", Routes);
 app.use("/api-v1/cart", cartRoutes);
 app.use("/api-v1/orders", orderRoutes);
 app.use("/api-v1/test", testRoutes);
